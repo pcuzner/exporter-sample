@@ -1,0 +1,24 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-exporter
+  namespace: openshift-paulc
+spec:
+  selector:
+    matchLabels:
+      app: my-exporter
+  replicas:
+  template:
+    metadata:
+      labels:
+        app: my-exporter
+    spec:
+      containers:
+      - name: my-exporter
+        image: docker.io/pcuzner/test-exporter:1.2
+        ports:
+        - containerPort: 9696
+        env:
+        - name: PORT
+          value: "9696"
